@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "TsConveter",
+  "version": "0.1.0",
+  "description": "Convert timestamp in human readable dates",
+  "icons": {
+    "48": "icons/clock.svg",
+    "96": "icons/clock.svg"
+  },
+  "browser_action": {
+    "default_icon": "icons/clock_48.svg",
+    "default_title": "TsConverter",
+    "default_popup": "popup/index.html"
+  }
+}
