@@ -1,7 +1,9 @@
 {
   "manifest_version": 2,
-  "name": "TsConveter",
+  "name": "ts-converter",
   "version": "0.1.0",
+  "author" : "Mirko Perillo",
+  "homepage_url": "https://github.com/mirkoperillo/ts-converter",
   "description": "Convert timestamp in human readable dates",
   "icons": {
     "48": "icons/clock.svg",
@@ -9,7 +11,7 @@
   },
   "browser_action": {
     "default_icon": "icons/clock_48.svg",
-    "default_title": "TsConverter",
+    "default_title": "ts-converter",
     "default_popup": "popup/index.html"
   }
 }
