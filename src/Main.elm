@@ -45,7 +45,7 @@ main =
 -- MODEL
 
 type alias Timestamp
-    = Int
+    = Maybe Int
 
 type Unit
     = Millis
@@ -61,7 +61,7 @@ type alias Model =
 
 
 init : () -> ( Model, Cmd Msg )
-init  _ = ( Model 0 Millis Time.utc ""
+init  _ = ( Model Nothing Millis Time.utc ""
             , Task.perform GiveMeTimeZone Time.here)
 
 -- UPDATE
@@ -87,11 +87,14 @@ update msg model =
       else
         Time.millisToPosix ( ts * 1000 )
         
-    formatter = format pattern model.zone <| toPosix model.unit model.ts
+    formatter = 
+      format pattern model.zone 
+      <| toPosix model.unit 
+      <| Maybe.withDefault 0 model.ts
   in
   case msg of
     SetTs ts ->
-      ( { model | ts = Maybe.withDefault 0 (String.toInt ts) }
+      ( { model | ts = String.toInt ts }
       , Cmd.none
       )
     MillisUnit c ->
@@ -129,11 +132,20 @@ view model =
   in
     div []
       [ 
-        input [ size 20, value (String.fromInt model.ts), onInput SetTs] []
+        input [ size 20, value (tsToString model.ts), onInput SetTs] []
         , button [ onClick Convert ] [ text ">" ]
         , div [] [ check "millis" millisChecked MillisUnit, check "sec" secChecked SecUnit]
         , div [] [ text (model.result) ]
       ]
+
+tsToString : Timestamp -> String
+tsToString ts =
+  case ts of
+    Nothing ->
+      ""
+    Just i ->
+      String.fromInt i
+      
 
 check: String -> Bool -> (Bool -> msg) -> Html msg
 check l isChecked ev = 
