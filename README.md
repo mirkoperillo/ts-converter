@@ -13,6 +13,10 @@ I created ts-converter with two goals:
 1. Compile source code with `scripts/compile.sh`
 2. Create extension package with `scripts/build-unsigned`
 
+## Quickstart dev
+
+Run `elm reactor` to see the result of Elm code
+
 ## License
 
 ts-converter is released under GPLv3
