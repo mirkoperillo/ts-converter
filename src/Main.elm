@@ -22,7 +22,7 @@ module Main exposing (..)
 
 import Browser
 import Html exposing (Html, button, div, text, input, label, span)
-import Html.Attributes exposing (size, value, type_, checked, name)
+import Html.Attributes exposing (size, value, type_, checked, name, class)
 import Html.Events exposing (onClick, onInput, onCheck)
 import DateFormat exposing (format)
 import Time
@@ -135,7 +135,7 @@ view model =
         input [ size 20, value (tsToString model.ts), onInput SetTs] []
         , button [ onClick Convert ] [ text ">" ]
         , div [] [ check "millis" millisChecked MillisUnit, check "sec" secChecked SecUnit]
-        , div [] [ text (model.result) ]
+        , div [class "result"] [ text (model.result) ]
       ]
 
 tsToString : Timestamp -> String

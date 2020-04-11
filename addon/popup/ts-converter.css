@@ -1,0 +1,10 @@
+html {
+ font-family: "Courier New", Courier, monospace;
+}
+div, button {
+  margin: 5px;
+}
+
+.result {
+  font-weight: bold;
+}
