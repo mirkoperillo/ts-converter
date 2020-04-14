@@ -1,16 +1,18 @@
 {
   "manifest_version": 2,
   "name": "ts-converter",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author" : "Mirko Perillo",
   "homepage_url": "https://github.com/mirkoperillo/ts-converter",
   "description": "Convert timestamp in human readable dates",
   "icons": {
-    "48": "icons/clock.svg",
-    "96": "icons/clock.svg"
+    "32": "icons/clock_32.png",
+    "48": "icons/clock_48.png",
+    "64": "icons/clock_64.png",
+    "128": "icons/clock_128.png"
   },
   "browser_action": {
-    "default_icon": "icons/clock_48.svg",
+    "default_icon": "icons/clock_48.png",
     "default_title": "ts-converter",
     "default_popup": "popup/index.html"
   }
