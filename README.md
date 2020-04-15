@@ -5,6 +5,10 @@ I created ts-converter with two goals:
 1. Start to learn [Elm](https://elm-lang.org/)
 2. I work a lot with timestamps
 
+Available for:
+* [Firefox](https://addons.mozilla.org/en-US/firefox/addon/ts-converter/)
+* [Chrome](https://chrome.google.com/webstore/detail/ts-converter/emcknecpbdklccndlgpmkfkmkjpdabni)
+
 ## Requirements
 * Elm >= 0.19
 
