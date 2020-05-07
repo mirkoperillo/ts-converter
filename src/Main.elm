@@ -22,7 +22,7 @@ module Main exposing (..)
 
 import Browser
 import Html exposing (Html, button, div, text, input, label, span)
-import Html.Attributes exposing (size, value, type_, checked, name, class)
+import Html.Attributes exposing (size, value, type_, checked, name, class, autofocus)
 import Html.Events exposing (onClick, onInput, onCheck)
 import DateFormat exposing (format)
 import Time
@@ -132,7 +132,7 @@ view model =
   in
     div []
       [ 
-        input [ size 20, value (tsToString model.ts), onInput SetTs] []
+        input [ size 20, value (tsToString model.ts), onInput SetTs, autofocus True] []
         , button [ onClick Convert ] [ text ">" ]
         , div [] [ check "millis" millisChecked MillisUnit, check "sec" secChecked SecUnit]
         , div [class "result"] [ text (model.result) ]
