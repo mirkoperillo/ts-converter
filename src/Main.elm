@@ -21,13 +21,14 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, button, div, text, input, label, span)
+import Browser.Events exposing (onKeyPress)
+import Html exposing (Html, Attribute, button, div, text, input, label, span)
 import Html.Attributes exposing (size, value, type_, checked, name, class, autofocus)
-import Html.Events exposing (onClick, onInput, onCheck)
+import Html.Events exposing (onClick, onInput, onCheck, on, keyCode)
 import DateFormat exposing (format)
 import Time
 import Task
-
+import Json.Decode as Decode
 
 
 -- MAIN
@@ -73,6 +74,7 @@ type Msg
   | MillisUnit Bool
   | SecUnit Bool
   | Convert
+  -- Get timezone
   | GiveMeTimeZone Time.Zone
 
 
@@ -114,10 +116,10 @@ update msg model =
       , Cmd.none
       )
 
+-- SUBSCRIPTIONS
 
 subscriptions : Model -> Sub Msg
-subscriptions model =
-  Sub.none
+subscriptions _ = Sub.none
 
 
 -- VIEW
@@ -132,7 +134,7 @@ view model =
   in
     div []
       [ 
-        input [ size 20, value (tsToString model.ts), onInput SetTs, autofocus True] []
+        input [ size 20, value (tsToString model.ts), onInput SetTs, onEnter Convert, autofocus True] []
         , button [ onClick Convert ] [ text ">" ]
         , div [] [ check "millis" millisChecked MillisUnit, check "sec" secChecked SecUnit]
         , div [class "result"] [ text (model.result) ]
@@ -155,6 +157,16 @@ check l isChecked ev =
       , input [ type_ "radio", name "unit", checked isChecked, onCheck ev][]
     ]
 
-
+onEnter: Msg -> Attribute Msg
+onEnter msg =
+  let 
+    isEnter code = 
+      if code == 13 then
+        Decode.succeed msg
+      else
+        Decode.fail "not ENTER"
+  in
+    on "keydown" (Decode.andThen isEnter keyCode)
+      
 
   
