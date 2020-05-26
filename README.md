@@ -15,7 +15,7 @@ Available for:
 ## Build
 
 1. Compile source code with `scripts/compile.sh`
-2. Create extension package with `scripts/build-unsigned`
+2. Create extension package with `scripts/build-unsigned.sh`
 
 ## Quickstart dev
 
