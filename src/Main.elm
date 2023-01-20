@@ -30,6 +30,7 @@ import Html.Events exposing (keyCode, on, onCheck, onClick, onInput)
 import Json.Decode as Decode
 import Task
 import Time
+import TimeZone
 
 
 
@@ -69,7 +70,7 @@ type alias Model =
 init : () -> ( Model, Cmd Msg )
 init _ =
     ( Model Nothing Millis Time.utc ""
-    , Task.perform GiveMeTimeZone Time.here
+    , TimeZone.getZone |> Task.attempt ReceiveTimeZone
     )
 
 
@@ -83,7 +84,7 @@ type Msg
     | SecUnit Bool
     | Convert
       -- Get timezone
-    | GiveMeTimeZone Time.Zone
+    | ReceiveTimeZone (Result TimeZone.Error ( String, Time.Zone ))
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -125,8 +126,13 @@ update msg model =
             , Cmd.none
             )
 
-        GiveMeTimeZone zone ->
-            ( { model | zone = zone }
+        ReceiveTimeZone result ->
+            ( case result of
+                Ok ( zoneName, zone ) ->
+                    { model | zone = zone }
+
+                Err error ->
+                    model
             , Cmd.none
             )
 
