@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "ts-converter",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author" : "Mirko Perillo",
   "homepage_url": "https://github.com/mirkoperillo/ts-converter",
   "description": "Convert timestamp in human readable dates",
